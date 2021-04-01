@@ -66,7 +66,7 @@
     <div class="container">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Grafica</a>
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Gráfica</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Presión</a>
@@ -93,12 +93,12 @@
         <div class="card-body">
             
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-12 col-sm-12">
                   <h4 class="card-title">Formulas</h4>
                     <p class="card-text">Presión Hidrostática:  Ph=ρgh</p>
                     <p class="card-text">Presión Absoluta: Pabs=Patm+ρgh</p>
                 </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-4 col-md-12 col-sm-12">
                   <h4 class="card-title">Descripción</h4>
                     ρ es igual a la densidad del fluido.
                     g es igual a la aceleración de gravedad.
@@ -106,12 +106,21 @@
 
                     <!-- data-toggle="tooltip" title="Pa = kg/m s2  ,   Pa = N/m2  " -->
                 </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                  <!-- <h4 class="card-title"></h4> -->
+                  <center>
+                    <div id="img_planeta_id">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/As08-16-2593.jpg" height="150px" width="150px">
+                      <div>Presión atmosférica: 1 atm.<br> Gravedad: 9,81 m/s².</div>
+                    </div>
+                  </center>
+                </div>
             </div>
                 <hr>
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <label>ρ densidad</label>
-                        <select value="" id="tipo_densidad_id"class="form-control">
+                        <select value="" id="tipo_densidad_id" class="form-control">
                           <option value="910">Aceite mineral 910 kg/m³</option>
                           <option value="790">Acetona 790 kg/m³</option>
                           <option value="1080">Ácido acético 1080 kg/m³</option>
@@ -149,16 +158,23 @@
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <label>gravedad (g) en <b>Newtons (N)</b></label>
                         <div class="input-group">
-                            <input class="form-control" id="gravedad_id" onclick="funcionFuerza();" onkeyup="funcionFuerza();" type="number" step="any" value="9.8" placeholder="Gravedad" data-toggle="tooltip" title="1 N = 1 kg*m/s^2" >
+                          <select value="" id="gravedad_id"class="form-control">
+                            <option value="9.81" selected>Tierra 9,81 m/s²</option>
+                            <option value="8.63">Venus 8,63 m/s²</option>
+                            <option value="1.37">Titán 1,37	m/s²</option>
+                            <option value="3.73">Marte 3,73 m/s²</option>
+                          </select>
+
+                            <!-- <input class="form-control" id="gravedad_id" onclick="funcionFuerza();" onkeyup="funcionFuerza();" type="number" step="any" value="9.8" placeholder="Gravedad" data-toggle="tooltip" title="1 N = 1 kg*m/s^2" >
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"> Newtons (N)</span>
-                              </div>
+                              </div> -->
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <label> profundidad (h) en <b>Metros (m)</b></label>
                         <div class="input-group">
-                            <input id="profundidad_id" class="form-control" type="number"  value="1.0" step="any" onclick="funcionMetros();" onkeyup="funcionMetros();" placeholder="profundidad">
+                            <input id="profundidad_id" class="form-control" type="number"  value="50.32" step="any" onclick="funcionMetros();" onkeyup="funcionMetros();" placeholder="profundidad">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Metros (m)</span>
                               </div>
@@ -175,7 +191,7 @@
                     </div>
                     <div class="col-6">
                       <div>
-                        <label> Patm</b></label>
+                        <label>Patm. 1atm = 101325pa</b></label>
                         <div class="input-group">
                             <input id="patm_id" class="form-control" type="number" onclick="funcionPatm();" onkeyup="funcionPatm();" value="101325" data-toggle="tooltip" title="A nivel del mar la presion atmosferica es de 101325 Pa = 1 atm =  760 Torr." step="any" placeholder="Patm">
                             <div class="input-group-prepend">
@@ -203,18 +219,8 @@
                 </div>
           </div>
         </div>  
-
-
-
-
-
-
-
         </div>
-  
       </div>
-        
-
         </div>
     </div>
 
@@ -234,17 +240,32 @@
         patm=parseFloat($("#patm_id").val());
         mensajeConver();
     }
-
-
     function funcionMetros(){
         profundidad=parseFloat($("#profundidad_id").val()); 
         mensajeConver();
     }
-
-    function funcionFuerza(){
+    // function funcionFuerza(){
+    $("#gravedad_id").change(function(){
         fuerza=parseFloat($("#gravedad_id").val()); 
+        if(fuerza==9.81){
+          $("#img_planeta_id").html('<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/As08-16-2593.jpg" width="150px"> <div>Presión atmosférica: 1 atm.<br> Gravedad: 9,81 m/s².</div>');
+          $("#patm_id").val("101325");//tierra
+        }else if(fuerza==8.63){
+
+          $("#img_planeta_id").html('<img src="https://astrosigma.com/images/sistema-solar/Venus-Mariner10-2020-600.jpg" width="150px"> <div>Presión atmosférica: 92,8 atm.<br> Gravedad: 8,63 m/s².</div>');
+          $("#patm_id").val("9402960");//Venus
+        }else if(fuerza==1.37){
+          $("#img_planeta_id").html('<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Two_Halves_of_Titan.png" width="150px"> <div>Presión atmosférica: 1,48 atm.<br> Gravedad: 1,37 m/s².</div>');
+          $("#patm_id").val("149961");//Titán
+        }else if(fuerza==3.73){
+          $("#img_planeta_id").html('<img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Schiaparelli_Hemisphere_Enhanced.jpg" width="150px"> <div>Presión atmosférica: 0,0079 atm.<br> Gravedad: 3,73 m/s².</div>');
+          $("#patm_id").val("800.4675");//Marte
+        }
+
+        patm=parseFloat($("#patm_id").val());//actualiza patm
         mensajeConver();
-    }
+    });
+    // }
 
     $("#tipo_densidad_id").change(function(){
         densidad=parseFloat($("#tipo_densidad_id").val());
@@ -261,7 +282,7 @@
 
     function mensajeConver(){
       var unidad=$("#select_conver_id").val();
-        mensajeConverVar="<h3>Presion Hidrostatica: "+conversionPresion(unidad,presionHidrostaticaPa())+"</h3>";
+        mensajeConverVar="<h3>Presión Hidrostatica: "+conversionPresion(unidad,presionHidrostaticaPa())+"</h3>";
         mensajeConverVar= mensajeConverVar+"<br><h3>Presión Absoluta: "+conversionPresion(unidad,presionHidrostaticaPa()+patm)+"</h3>";
         $("#divConver").html(mensajeConverVar);
         grafica();
@@ -351,7 +372,7 @@ Highcharts.chart('containerCompaDensi', {
     type: 'column'
   },
   title: {
-    text: 'Grafica de Densidad'
+    text: 'Gráfica de Densidad'
   },
 //   subtitle: {
 //     text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
